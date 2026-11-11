@@ -1,0 +1,14 @@
+\section{Conclusion}
+Representing a discrete-time signal requires both its sample vector and
+its time origin. Time shifts change the origin, folding reverses the
+sample order and updates the origin, and addition or pointwise
+multiplication requires alignment by time. Convolution accumulates
+products at sums of input time indices and has a different origin rule.
+
+The supplementary derivations establish that folding and shifting do
+not generally commute and that the decomposition into even and odd
+components exists and is unique. For the three systems in Problem 2.6,
+the first-difference system is time invariant, while the squared-time
+and time-multiplication systems are time varying. A failed shift test
+provides a counterexample; proving time invariance requires an identity
+valid for arbitrary inputs and shifts.

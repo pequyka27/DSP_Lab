@@ -1,0 +1,25 @@
+# Lab 3 report progress
+
+- Main source: `main.tex`. Working language: English, matching the handout and template.
+- User instruction: write incrementally, one exercise at a time. Do not compile or open an automatic PDF preview until requested.
+- Template: `../../HCMUT_Report_Template/`. The local class, logo, and license are copied unchanged; the report body and listing configuration are new.
+- Cover placeholders: faculty, instructor, student name, student ID. Confirm these before finalizing.
+- All assigned content is drafted: overview, Exercises 1 through 6, supplementary Problems 2.1, 2.2, 2.4, 2.6, and conclusion. Graphical evidence is reviewed for all except Problem 2.6.
+- Full source listings read `../1.sci` through `../6.sci`, `../2_1.sci`, `../2_2.sci`, `../2_4.sci`, and `../2_6.sci` directly. Keep the report folder within Lab 3.
+- Fixed Exercise 1: removed the extra `plot2d3(nx, xn)` from the output subplot, which previously overlaid the original signal on the delayed signal.
+- User replaced `../1.png` with a fresh screenshot. Reviewed: delay by one sample is correct, with no overlay. Copied into `images/exercise1.png`.
+- Reviewed `../2.png`: advance by one sample is correct; amplitudes 1, -2, 3, 6 appear at n = -3, -2, -1, 0. Copied into `images/exercise2.png`.
+- Reviewed `../3.png`: folding is correct; amplitudes 6, 3, -2, 1 appear at n = -1, 0, 1, 2. Copied into `images/exercise3.png`.
+- Reviewed `../4.png`: aligned addition is correct; output amplitudes 1, 1, 3, 6, -2 appear at n = -1, 0, 1, 2, 3. Copied into `images/exercise4.png`.
+- Reviewed `../5.png`: pointwise multiplication is correct; the output has amplitude 2 at n = 1 and 9 at n = 2 and is zero at the other displayed sample times. Copied into `images/exercise5.png`.
+- Reviewed `../6.png`: convolution is correct; output amplitudes 1, -1, 1, 9, 6 appear at n = -2, -1, 0, 1, 2. Copied into `images/exercise6.png`.
+- The reviewed plot screenshots provide execution evidence for Exercises 1 through 6. No console screenshot was supplied; console values are not claimed to have been visually verified. Console screenshots may be added if useful later.
+- Reviewed user image `../2.1` (PNG content despite missing .png extension): all four Problem 2.1 plots are correct. Part (b1) equals part (c): x(4-n). Part (b2) is x(-n-4). Copied unchanged into `images/problem21.png`. Console reconstruction errors have not been visually checked.
+- Reviewed `../2_2_ad.png` and `../2_2_ed.png` (the latter contains parts e--h despite its filename): all eight plots match the analytical results. Copied unchanged into `images/problem22-ad.png` and `images/problem22-eh.png`. Console reconstruction error has not been visually checked.
+- Reviewed `../2_4.png`: original and reconstructed sequences match, even part is `[4, 4, 4, 4, 4]`, odd part is `[-2, -1, 0, 1, 2]` on n = -2:2. Copied into `images/problem24.png`. Console errors have not been visually checked.
+- Reviewed and copied Problem 2.6 screenshots `../2_6_b.png`, `../2_6_c.png`, `../2_6_d.png` into `images/problem26-b.png`, `images/problem26-c.png`, and `images/problem26-d.png`.
+- Cover information updated in `main.tex`:
+  - Faculty: Faculty of Computer Science and Engineering
+  - Instructor: Nguyễn Công Thái
+  - Students: Vũ Đức Minh (2452774), Phương Quốc Khanh (2452488)
+- Compiled successfully with pdflatex (3 passes, table of contents and cross-references resolved, 50 pages total). PDF available at `report/main.pdf`.

@@ -1,0 +1,28 @@
+\section{Objectives and signal representation}
+This laboratory reviews discrete-time signals and systems through Scilab
+functions for time shifting, folding, addition, pointwise multiplication,
+and convolution. Each function is illustrated with an example, its source
+code, and graphical or numerical output.
+
+A finite sequence is represented by a vector \texttt{xn} and an integer
+\texttt{xorigin}. If \texttt{xorigin} is within the stored vector, it is
+the position of the sample at $n=0$. Since Scilab indices start at one,
+the time corresponding to vector position $i$ is
+\begin{equation}
+  n_i=i-\texttt{xorigin},\qquad i=1,\ldots,N,
+\end{equation}
+where $N$ is the vector length. Thus the time axis is constructed as
+\begin{lstlisting}[numbers=none]
+nx = (1:length(xn)) - xorigin;
+\end{lstlisting}
+Samples outside the stored interval are assumed to be zero. After a time
+shift, the origin parameter may fall outside $1,\ldots,N$; it still
+defines the time coordinates and must not be used directly as a vector
+index in that case.
+
+For example, \texttt{xn = [1, -2, 3, 6]} and \texttt{xorigin = 3}
+represent $x(-2)=1$, $x(-1)=-2$, $x(0)=3$, and $x(1)=6$.
+
+The plots use vertical bars to represent discrete samples. Input and
+output plots share the same axis limits, with a line thickness of three
+pixels, so that their time positions can be compared directly.

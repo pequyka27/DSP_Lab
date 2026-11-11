@@ -1,0 +1,88 @@
+\section{Supplementary Problem 2.4}
+The task is to show that every discrete-time signal can be decomposed
+into an even and an odd component, determine whether this decomposition
+is unique, and illustrate the result with $x(n)=\{2,3,4,5,6\}$, where
+the central sample $4$ corresponds to $n=0$.
+
+\subsection{Existence of the decomposition}
+For an arbitrary signal $x(n)$, define
+\begin{align}
+  x_e(n)&=\frac{x(n)+x(-n)}{2},\\
+  x_o(n)&=\frac{x(n)-x(-n)}{2}.
+\end{align}
+Evaluating at $-n$ gives
+\begin{align}
+  x_e(-n)&=\frac{x(-n)+x(n)}{2}=x_e(n),\\
+  x_o(-n)&=\frac{x(-n)-x(n)}{2}=-x_o(n).
+\end{align}
+Thus $x_e$ is even and $x_o$ is odd. Their sum is
+\begin{equation}
+  x_e(n)+x_o(n)
+  =\frac{x(n)+x(-n)+x(n)-x(-n)}{2}=x(n),
+\end{equation}
+which proves that the decomposition exists for every signal.
+
+\subsection{Uniqueness of the decomposition}
+Suppose $x(n)=a(n)+b(n)$ for some even signal $a$ and odd signal $b$.
+Their symmetry implies
+\begin{equation}
+  x(-n)=a(-n)+b(-n)=a(n)-b(n).
+\end{equation}
+Adding and subtracting the two equations forces
+\begin{align}
+  a(n)&=\frac{x(n)+x(-n)}{2}=x_e(n),\\
+  b(n)&=\frac{x(n)-x(-n)}{2}=x_o(n).
+\end{align}
+Every even/odd decomposition therefore has exactly these components,
+so the decomposition is unique. This algebraic argument applies to
+arbitrary $x$; the numerical example below only illustrates the result.
+
+\subsection{Example and expected result}
+The given sequence is stored on $n=-2,-1,0,1,2$, with zero values
+outside that interval. Since this time grid is symmetric about zero,
+reversing the vector gives the samples of $x(-n)$ on the same grid.
+\begin{table}[H]
+  \centering
+  \caption{Unique even and odd components for Problem 2.4}
+  \label{tab:p24}
+  \begin{tabular}{lrrrrr}
+    \toprule
+    Time $n$ & $-2$ & $-1$ & 0 & 1 & 2\\
+    \midrule
+    $x(n)$ & 2 & 3 & 4 & 5 & 6\\
+    $x(-n)$ & 6 & 5 & 4 & 3 & 2\\
+    $x_e(n)$ & 4 & 4 & 4 & 4 & 4\\
+    $x_o(n)$ & $-2$ & $-1$ & 0 & 1 & 2\\
+    $x_e(n)+x_o(n)$ & 2 & 3 & 4 & 5 & 6\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+Consequently,
+\begin{align}
+  x_e(n)&=\begin{cases}4,& |n|\leq2,\\0,&\text{otherwise},\end{cases}\\
+  x_o(n)&=\begin{cases}n,& |n|\leq2,\\0,&\text{otherwise}.\end{cases}
+\end{align}
+Both vectors retain origin position three. The even component is
+constant only on the stated finite interval, and the odd component
+has a zero sample at the origin as required.
+
+\subsection{Scilab implementation}
+The script computes the two components and their sum, then displays
+four plots: the original signal, the even component, the odd component,
+and the reconstructed signal. It also prints three numerical checks:
+\begin{align}
+  \max_n|x(n)-x_e(n)-x_o(n)|&=0,\\
+  \max_n|x_e(n)-x_e(-n)|&=0,\\
+  \max_n|x_o(n)+x_o(-n)|&=0.
+\end{align}
+These are expected results for the specified example; the proof of
+uniqueness is the general derivation above.
+\lstinputlisting[caption={Scilab implementation of supplementary Problem 2.4},label={lst:p24}]{../2_4.sci}
+
+\subsection{Execution evidence}
+\resultfigure{images/problem24.png}
+  {Original signal, even and odd components, and reconstruction for Problem 2.4}
+  {fig:p24}
+The captured plots match \Cref{tab:p24}. The even component has five
+samples of amplitude four, the odd component has amplitudes
+$-2,-1,0,1,2$, and the reconstructed signal matches the original.

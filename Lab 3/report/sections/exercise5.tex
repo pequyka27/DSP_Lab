@@ -1,0 +1,70 @@
+\section{Exercise 5: Multiplication}
+\subsection{Task and method}
+Implement \texttt{[yn, yorigin] = multi(x1n, x1origin, x2n, x2origin)}
+to calculate the pointwise product
+\begin{equation}
+  y(n)=x_1(n)x_2(n).
+\end{equation}
+As in Exercise 4, the input samples must first be aligned by time.
+Let $N_1,N_2$ be the input vector lengths and $o_1,o_2$ their origins.
+The implementation retains the full common interval
+\begin{align}
+  n_{\min}&=\min(1-o_1,1-o_2),\\
+  n_{\max}&=\max(N_1-o_1,N_2-o_2).
+\end{align}
+Two zero-filled vectors are created on this interval. Each stored input
+sample at time $n$ is inserted at position $n-n_{\min}+1$.
+The output is then obtained with the Scilab elementwise operator:
+\begin{lstlisting}[numbers=none]
+yn = x1aligned .* x2aligned;
+yorigin = 1 - nfirst;
+\end{lstlisting}
+The operator \texttt{.*} multiplies corresponding samples;
+\texttt{*} performs matrix multiplication. The pointwise product is
+also distinct from the convolution operation in Exercise 6.
+
+\subsection{Source code}
+\lstinputlisting[caption={Scilab pointwise multiplication function and example call},label={lst:multi}]{../5.sci}
+
+\subsection{Example and expected result}
+Reuse the two input signals from Exercise 4:
+\begin{lstlisting}[numbers=none]
+[yn, yorigin] = multi([0, 1, 3, -2], 1, [1, 1, 2, 3], 2);
+\end{lstlisting}
+Both inputs are represented on $n=-1,0,1,2,3$ before multiplication.
+\begin{table}[H]
+  \centering
+  \caption{Time alignment and pointwise multiplication}
+  \label{tab:multi}
+  \begin{tabular}{lrrrrr}
+    \toprule
+    Time $n$ & $-1$ & 0 & 1 & 2 & 3\\
+    \midrule
+    Aligned $x_1(n)$ & 0 & 0 & 1 & 3 & $-2$\\
+    Aligned $x_2(n)$ & 1 & 1 & 2 & 3 & 0\\
+    Product $y(n)$ & 0 & 0 & 2 & 9 & 0\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+The calculated output is
+\[
+  \texttt{yn}=[0,0,2,9,0],\qquad \texttt{yorigin}=2.
+\]
+Zero-valued samples at the interval boundaries are retained. The origin
+therefore refers to the second position, even though the first nonzero
+output occurs at the third position.
+
+\subsection{Execution evidence}
+\resultfigure{images/exercise5.png}
+  {Aligned input signals and their pointwise product for Exercise 5}
+  {fig:multi}
+The captured Scilab plot agrees with \Cref{tab:multi}: the output has
+two nonzero samples, at $n=1$ and $n=2$.
+
+\subsection{Discussion}
+At $n=1$, the product is $1\times2=2$, and at $n=2$ it is
+$3\times3=9$. At $n=-1$, $n=0$, and $n=3$, at least one factor is
+zero, so the output is zero. The captured output plot therefore contains
+two nonzero bars, of amplitudes $2$ and $9$ at $n=1$ and $n=2$,
+respectively. In general, a pointwise product can be nonzero only where
+both input signals are nonzero.

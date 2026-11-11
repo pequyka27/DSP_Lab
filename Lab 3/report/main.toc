@@ -1,0 +1,73 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Objectives and signal representation}{6}{section.1}%
+\contentsline {section}{\numberline {2}Exercise 1: Delay}{6}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Task and method}{6}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Source code}{7}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Example and expected result}{8}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Execution evidence}{8}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Discussion}{9}{subsection.2.5}%
+\contentsline {section}{\numberline {3}Exercise 2: Advance}{10}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Task and method}{10}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Source code}{10}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Example and expected result}{11}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Execution evidence}{12}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Discussion}{12}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Exercise 3: Folding}{13}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Task and method}{13}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Source code}{13}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Example and expected result}{14}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Execution evidence}{15}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Discussion}{15}{subsection.4.5}%
+\contentsline {section}{\numberline {5}Exercise 4: Addition}{17}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Task and method}{17}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Source code}{17}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Example and expected result}{19}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Execution evidence}{20}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Discussion}{20}{subsection.5.5}%
+\contentsline {section}{\numberline {6}Exercise 5: Multiplication}{21}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Task and method}{21}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Source code}{21}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Example and expected result}{23}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Execution evidence}{24}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}Discussion}{24}{subsection.6.5}%
+\contentsline {section}{\numberline {7}Exercise 6: Convolution}{25}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Task and method}{25}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Source code}{25}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Example and expected result}{27}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Execution evidence}{28}{subsection.7.4}%
+\contentsline {subsection}{\numberline {7.5}Discussion}{28}{subsection.7.5}%
+\contentsline {section}{\numberline {8}Supplementary Problem 2.1}{29}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Part (a): Sample values}{29}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Part (b): Changing the operation order}{29}{subsection.8.2}%
+\contentsline {subsubsection}{\numberline {8.2.1}Fold first, then delay by four samples}{29}{subsubsection.8.2.1}%
+\contentsline {subsubsection}{\numberline {8.2.2}Delay first, then fold}{30}{subsubsection.8.2.2}%
+\contentsline {subsection}{\numberline {8.3}Part (c): The signal x(-n+4)}{30}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}Part (d): General rule}{30}{subsection.8.4}%
+\contentsline {subsection}{\numberline {8.5}Part (e): Impulse and unit-step representations}{31}{subsection.8.5}%
+\contentsline {subsection}{\numberline {8.6}Scilab source and expected checks}{31}{subsection.8.6}%
+\contentsline {subsection}{\numberline {8.7}Execution evidence}{33}{subsection.8.7}%
+\contentsline {section}{\numberline {9}Supplementary Problem 2.2}{34}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Part (a): Delay by two samples}{34}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Part (b): Folding followed by a four-sample delay}{34}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Part (c): Advance by two samples}{34}{subsection.9.3}%
+\contentsline {subsection}{\numberline {9.4}Part (d): Multiplication by a reversed step}{35}{subsection.9.4}%
+\contentsline {subsection}{\numberline {9.5}Part (e): Multiplication by a shifted impulse}{35}{subsection.9.5}%
+\contentsline {subsection}{\numberline {9.6}Part (f): A squared time argument}{35}{subsection.9.6}%
+\contentsline {subsection}{\numberline {9.7}Parts (g) and (h): Even and odd components}{35}{subsection.9.7}%
+\contentsline {subsection}{\numberline {9.8}Scilab implementation}{36}{subsection.9.8}%
+\contentsline {subsection}{\numberline {9.9}Execution evidence}{38}{subsection.9.9}%
+\contentsline {section}{\numberline {10}Supplementary Problem 2.4}{40}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Existence of the decomposition}{40}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Uniqueness of the decomposition}{40}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Example and expected result}{41}{subsection.10.3}%
+\contentsline {subsection}{\numberline {10.4}Scilab implementation}{41}{subsection.10.4}%
+\contentsline {subsection}{\numberline {10.5}Execution evidence}{43}{subsection.10.5}%
+\contentsline {section}{\numberline {11}Supplementary Problem 2.6}{44}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Criterion for time invariance}{44}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}Part (a): Squared-time system}{44}{subsection.11.2}%
+\contentsline {subsection}{\numberline {11.3}Part (b): Explicit pulse example}{44}{subsection.11.3}%
+\contentsline {subsection}{\numberline {11.4}Part (c): First-difference system}{45}{subsection.11.4}%
+\contentsline {subsection}{\numberline {11.5}Part (d): Multiplication by time}{46}{subsection.11.5}%
+\contentsline {subsection}{\numberline {11.6}Scilab implementation and expected results}{47}{subsection.11.6}%
+\contentsline {subsection}{\numberline {11.7}Execution evidence}{49}{subsection.11.7}%
+\contentsline {section}{\numberline {12}Conclusion}{50}{section.12}%

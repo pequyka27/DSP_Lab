@@ -1,0 +1,127 @@
+% 'draft' mode can be used to speed up compilation
+\documentclass[twoside,final]{hcmut-report}
+\usepackage{codespace}
+
+% Draft watermark
+% https://github.com/callegar/LaTeX-draftwatermark
+
+% Encodings
+\usepackage{gensymb,textcomp}
+
+% Better tables
+% Wide tables go to https://tex.stackexchange.com/q/332902
+\usepackage{array,longtable,multicol,multirow,siunitx,tabularx}
+
+% Better enum
+\usepackage{enumitem}
+
+% Graphics
+\usepackage{caption,float}
+
+% Add options for figures, like max width, framing, etc.
+\usepackage[export]{adjustbox}
+
+% References
+% Use \Cref{} instead of \ref{}
+\usepackage[nameinlink]{cleveref}
+
+% FOR DEMONSTRATION PURPOSES, REMOVE IN PRODUCTION
+\usepackage{mwe}
+
+% Sub-preambles
+% https://github.com/MartinScharrer/standalone
+
+% Configurations
+\coursename{Course name h}
+\reporttype{Report type h}
+\title{Report title h}
+\advisor{& Advisor h &}
+\stuname{%
+  & Student 1 & ID 1 \\
+  & Student 2 & ID 2 \\
+  & Student 3 & ID 3 \\
+}
+
+% Allow page breaks inside align* environment
+%\allowdisplaybreaks{}
+
+% Makes a lot of things blue, avoid at all costs
+%\everymath{\color{blue}}
+
+% Set depth of numbering for counters
+\AtBeginDocument{\counterwithin{lstlisting}{section}}
+
+% Rename some sections
+%\AtBeginDocument{\renewcommand*{\contentsname}{Contents}}
+%\AtBeginDocument{\renewcommand*{\refname}{References}}
+%\AtBeginDocument{\renewcommand*{\bibname}{References}}
+
+% Custom commands
+%\newcommand*\mean[1]{\bar{#1}}
+
+\begin{document}
+\coverpage%
+
+%\section*{Member list \& Workload}
+%\newcounter{memberrowno}
+%\setcounter{memberrowno}{0}
+%\begin{center}
+%  \begin{tabular}{>{\stepcounter{memberrowno}\thememberrowno}llcc}
+%    \toprule
+%    \multicolumn{1}{c}{\textbf{No.}} & \textbf{Full name} & \textbf{Student ID} & \textbf{Contribution} \\
+%    \midrule
+%                                     & h                  & xxxxxxx             & 100\%                       \\
+%                                     & h                  & xxxxxxx             & 100\%                       \\
+%    \bottomrule
+%  \end{tabular}
+%\end{center}
+%\clearpage
+
+\tableofcontents
+\listoffigures
+\listoftables
+\lstlistoflistings{}
+
+\clearpage
+\section{Normal section}
+This is how you normally work with \LaTeX, but you can also split a project into smaller files for easier management.
+To import other files, you can use \mintinline{latex}{\input{}} or \mintinline{latex}{\include{}}.
+There differences can be found at \url{https://tex.stackexchange.com/a/250}, but in short
+
+\begin{center}
+  \mintinline{latex}{\include{filename}} = \mintinline{latex}{\clearpage \input{filename} \clearpage}
+\end{center}
+
+\section{Label prefixes}
+There are no definite rules for label prefixes, but you can use the following as a guideline.
+\begin{itemize}
+  \item \textbf{chap:} for chapters
+  \item \textbf{sec:} for sections
+  \item \textbf{subsec:} for subsections
+  \item \textbf{eq:} for equations
+  \item \textbf{fig:} for figures
+  \item \textbf{tab:} for tables
+  \item \textbf{enum:} for enumerators and items
+  \item \textbf{fn:} for footnotes
+  \item \textbf{lst:} for listings
+  \item \textbf{alg:} for algorithms
+  \item \textbf{app:} for appendices
+\end{itemize}
+
+The \mintinline{latex}{\caption} macro increases the used counter and sets the current label text which is used by \mintinline{latex}{\label}.
+If you use \mintinline{latex}{\label} before it the old label text is used instead, which leads to a wrong number.
+Always use \mintinline{latex}{\label} after \mintinline{latex}{\caption} and not before or in it.
+
+That said, conventions are just conventions, and you can use whatever you want as long as you are consistent.
+
+\clearpage
+\input{chapters/example/better-tables.tex}
+\input{chapters/example/better-enum.tex}
+\include{chapters/example/codespace.tex}
+\include{chapters/example/figwidth.tex}
+
+\bibliographystyle{plain}
+\bibliography{refs/example.bib}
+\nocite{*}
+
+\end{document}

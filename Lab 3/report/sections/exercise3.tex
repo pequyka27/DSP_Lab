@@ -1,0 +1,76 @@
+\section{Exercise 3: Folding}
+\subsection{Task and method}
+Implement \texttt{[yn, yorigin] = fold(xn, xorigin)} for
+\begin{equation}
+  y(n)=x(-n).
+\end{equation}
+Folding reflects the signal about $n=0$. Each sample at time $n_i$
+moves to $-n_i$ while retaining its amplitude. To keep the output vector
+ordered by increasing time, its elements must be stored in reverse order.
+
+Let $N$ be the input vector length. Input position $i$ becomes output
+position $j=N+1-i$. The corresponding time relation is
+\begin{align}
+  j-\texttt{yorigin} &= -(i-\texttt{xorigin}),\\
+  N+1-i-\texttt{yorigin} &= -i+\texttt{xorigin},\\
+  \texttt{yorigin} &= N+1-\texttt{xorigin}.
+\end{align}
+In Scilab, \texttt{xn(\$:-1:1)} selects the elements from the last
+position to the first, using a step of $-1$. Both the vector order and
+the origin parameter must be updated.
+
+\subsection{Source code}
+\lstinputlisting[caption={Scilab folding function and example call},label={lst:fold}]{../3.sci}
+
+\subsection{Example and expected result}
+Use the same input sequence as in the preceding exercises:
+\begin{lstlisting}[numbers=none]
+[yn, yorigin] = fold([1, -2, 3, 6], 3);
+\end{lstlisting}
+The calculated output is
+\[
+  \texttt{yn}=[6,3,-2,1],\qquad
+  \texttt{yorigin}=4+1-3=2.
+\]
+\begin{table}[H]
+  \centering
+  \caption{Time reversal of each input sample}
+  \label{tab:fold-mapping}
+  \begin{tabular}{lrrrr}
+    \toprule
+    Sample value & 1 & $-2$ & 3 & 6\\
+    \midrule
+    Input time $n_i$ & $-2$ & $-1$ & 0 & 1\\
+    Reflected time $-n_i$ & 2 & 1 & 0 & $-1$\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+Reading the reflected samples in increasing time gives
+\begin{table}[H]
+  \centering
+  \caption{Output vector arranged in increasing time}
+  \label{tab:fold-output}
+  \begin{tabular}{lrrrr}
+    \toprule
+    Output vector position & 1 & 2 & 3 & 4\\
+    \midrule
+    Output time $n$ & $-1$ & 0 & 1 & 2\\
+    Output value $y(n)$ & 6 & 3 & $-2$ & 1\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Execution evidence}
+\resultfigure{images/exercise3.png}
+  {Input and folded output for Exercise 3}
+  {fig:fold}
+The captured Scilab plot agrees with the calculated output coordinates
+in \Cref{tab:fold-output}.
+
+\subsection{Discussion}
+The captured output is the reflection of the input about the vertical
+axis at $n=0$. The sample of amplitude $6$ moves from $n=1$ to $n=-1$,
+and the sample of amplitude $1$ moves from $n=-2$ to $n=2$. The sample
+at $n=0$ retains its amplitude $3$, although its position within the
+stored vector changes from three to two. Folding changes time
+coordinates, not the signs of the amplitudes.

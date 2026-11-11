@@ -1,0 +1,95 @@
+% Lab 3 report, prepared incrementally from HCMUT_Report_Template.
+% Do not compile until the user requests it.
+\documentclass[twoside,final]{hcmut-report}
+\usepackage{xcolor,listings,float}
+\usepackage{array}
+\usepackage[nameinlink]{cleveref}
+
+% Keep the template's cover, logo, margins, and page headers.
+\deptname{Faculty of Computer Science and Engineering}
+\coursename{Digital Signal Processing Laboratory}
+\reporttype{Laboratory Report 3}
+\title{Discrete Time Signals and Systems}
+\advisor{& Nguyễn Công Thái &}
+\stuname{%
+  & Vũ Đức Minh & 2452774 \\
+  & Phương Quốc Khanh & 2452488
+}
+\reportplace{Ho Chi Minh City}
+\reporttime{October 2026}
+
+% Scilab source listings; no external syntax-highlighting process is needed.
+\lstdefinelanguage{Scilab}{
+  morekeywords={function,endfunction,for,end,if,then,else,elseif,while,return},
+  sensitive=true,
+  morecomment=[l]{//},
+  morestring=[b]"
+}
+\definecolor{codebackground}{RGB}{248,245,250}
+\definecolor{codekeyword}{RGB}{110,40,150}
+\definecolor{codecomment}{RGB}{0,110,55}
+\lstset{
+  language=Scilab,
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{codekeyword}\bfseries,
+  commentstyle=\color{codecomment},
+  stringstyle=\color{brown},
+  backgroundcolor=\color{codebackground},
+  frame=lines,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=8pt,
+  breaklines=true,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  tabsize=4,
+  captionpos=b
+}
+\AtBeginDocument{\counterwithin{lstlisting}{section}}
+
+% Only reviewed screenshots should be placed at these figure paths.
+\newcommand{\resultfigure}[3]{%
+  \begin{figure}[H]
+    \centering
+    \IfFileExists{#1}{%
+      \includegraphics[width=0.88\linewidth,height=0.58\textheight,keepaspectratio]{#1}%
+    }{%
+      \fbox{\parbox[c][3cm][c]{0.84\linewidth}{\centering
+        Screenshot pending\\[0.5em]
+        Run the Scilab script and insert the verified output here.}}%
+    }
+    \caption{#2}
+    \label{#3}
+  \end{figure}
+}
+
+\begin{document}
+\coverpage
+\tableofcontents
+\clearpage
+
+\input{sections/overview}
+\input{sections/exercise1}
+\clearpage
+\input{sections/exercise2}
+\clearpage
+\input{sections/exercise3}
+\clearpage
+\input{sections/exercise4}
+\clearpage
+\input{sections/exercise5}
+\clearpage
+\input{sections/exercise6}
+\clearpage
+\input{sections/problem21}
+\clearpage
+\input{sections/problem22}
+\clearpage
+\input{sections/problem24}
+\clearpage
+\input{sections/problem26}
+\input{sections/conclusion}
+
+% All assigned exercises are drafted; final screenshots and cover details pending.
+\end{document}

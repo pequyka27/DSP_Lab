@@ -1,0 +1,56 @@
+\section{Exercise 1: Delay}
+\subsection{Task and method}
+Implement \texttt{[yn, yorigin] = delay(xn, xorigin, k)} for
+\begin{equation}
+  y(n)=x(n-k),\qquad k>0,
+\end{equation}
+where $k$ is an integer number of samples. A sample originally at $n_i$
+appears at $n_i+k$ in the output. The vector values and their order are
+unchanged. The output origin follows from
+\begin{align}
+  i-\texttt{yorigin} &= i-\texttt{xorigin}+k,\\
+  \texttt{yorigin} &= \texttt{xorigin}-k.
+\end{align}
+The implementation constructs the two time axes separately and displays
+the signals in two subplots within one figure.
+
+\subsection{Source code}
+\lstinputlisting[caption={Scilab delay function and example call},label={lst:delay}]{../1.sci}
+
+\subsection{Example and expected result}
+For the example in the lab handout,
+\begin{lstlisting}[numbers=none]
+[yn, yorigin] = delay([1, -2, 3, 6], 3, 1);
+\end{lstlisting}
+the calculated output is
+\[
+  \texttt{yn}=[1,-2,3,6],\qquad \texttt{yorigin}=2.
+\]
+\begin{table}[H]
+  \centering
+  \caption{Sample coordinates before and after a one-sample delay}
+  \label{tab:delay}
+  \begin{tabular}{lrrrr}
+    \toprule
+    Vector position $i$ & 1 & 2 & 3 & 4\\
+    \midrule
+    Sample value & 1 & $-2$ & 3 & 6\\
+    Input time $n_i$ & $-2$ & $-1$ & 0 & 1\\
+    Output time $n_i+1$ & $-1$ & 0 & 1 & 2\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Execution evidence}
+\resultfigure{images/exercise1.png}
+  {Input and delayed output for Exercise 1}
+  {fig:delay}
+The captured Scilab plot agrees with the calculated sample coordinates
+in \Cref{tab:delay}; the output subplot contains only the delayed signal.
+
+\subsection{Discussion}
+The captured output graph is shifted to the right by one sample. In particular,
+the sample of amplitude $3$ moves from $n=0$ to $n=1$, while the sample
+of amplitude $6$ moves from $n=1$ to $n=2$. The output value at $n=0$ is
+$-2$, which occupies vector position two. This explains why the origin
+parameter decreases even though the signal moves to the right.

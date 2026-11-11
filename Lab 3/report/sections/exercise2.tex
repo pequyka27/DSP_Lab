@@ -1,0 +1,59 @@
+\section{Exercise 2: Advance}
+\subsection{Task and method}
+Implement \texttt{[yn, yorigin] = advance(xn, xorigin, k)} for
+\begin{equation}
+  y(n)=x(n+k),\qquad k>0,
+\end{equation}
+where $k$ is an integer number of samples. Advancing the signal moves
+each sample to the left by $k$ time units. A sample originally at $n_i$
+therefore appears at $n_i-k$. As with delay, the stored amplitudes and
+their order remain unchanged:
+\begin{align}
+  \texttt{yn} &= \texttt{xn},\\
+  i-\texttt{yorigin} &= i-\texttt{xorigin}-k,\\
+  \texttt{yorigin} &= \texttt{xorigin}+k.
+\end{align}
+The origin parameter increases because it is a reference vector position,
+not the direction of the time shift.
+
+\subsection{Source code}
+\lstinputlisting[caption={Scilab advance function and example call},label={lst:advance}]{../2.sci}
+
+\subsection{Example and expected result}
+Use the same input sequence as in Exercise 1 to compare the two operations:
+\begin{lstlisting}[numbers=none]
+[yn, yorigin] = advance([1, -2, 3, 6], 3, 1);
+\end{lstlisting}
+The calculated output is
+\[
+  \texttt{yn}=[1,-2,3,6],\qquad \texttt{yorigin}=4.
+\]
+\begin{table}[H]
+  \centering
+  \caption{Sample coordinates before and after a one-sample advance}
+  \label{tab:advance}
+  \begin{tabular}{lrrrr}
+    \toprule
+    Vector position $i$ & 1 & 2 & 3 & 4\\
+    \midrule
+    Sample value & 1 & $-2$ & 3 & 6\\
+    Input time $n_i$ & $-2$ & $-1$ & 0 & 1\\
+    Output time $n_i-1$ & $-3$ & $-2$ & $-1$ & 0\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Execution evidence}
+\resultfigure{images/exercise2.png}
+  {Input and advanced output for Exercise 2}
+  {fig:advance}
+The captured Scilab plot agrees with the calculated sample coordinates
+in \Cref{tab:advance}.
+
+\subsection{Discussion}
+The captured output graph moves to the left by one sample without changing any
+amplitude. The sample of amplitude $3$ moves from $n=0$ to $n=-1$, and
+the sample of amplitude $6$ moves from $n=1$ to $n=0$. Since the latter
+is the fourth element of the vector, the output origin is four.
+Delay and advance therefore use opposite changes to the origin parameter:
+subtract $k$ for delay and add $k$ for advance.

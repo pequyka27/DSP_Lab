@@ -1,0 +1,84 @@
+\section{Exercise 6: Convolution}
+\subsection{Task and method}
+Implement \texttt{[yn, yorigin] = convolution(xn, xorigin, hn, horigin)}
+to calculate
+\begin{equation}
+  y(n)=(x*h)(n)=\sum_{k=-\infty}^{\infty}x(k)h(n-k).
+\end{equation}
+For an LTI system with impulse response $h(n)$ and input $x(n)$,
+this convolution gives the output. Only finitely many terms contribute
+for the stored finite sequences, which are zero outside their intervals.
+
+Let the input lengths be $N$ and $M$. Initialize an output vector with
+$N+M-1$ zeros. For each pair of input vector positions $i$ and $j$,
+accumulate its contribution at output position $i+j-1$:
+\begin{lstlisting}[numbers=none]
+for i = 1:N
+    for j = 1:M
+        yn(i+j-1) = yn(i+j-1) + xn(i)*hn(j);
+    end
+end
+\end{lstlisting}
+The product contributes at the sum of the input sample times,
+\begin{equation}
+  n=(i-\texttt{xorigin})+(j-\texttt{horigin}).
+\end{equation}
+At output vector position $r=i+j-1$, the time is also
+$n=r-\texttt{yorigin}$. Equating these expressions gives
+\begin{equation}
+  \texttt{yorigin}=\texttt{xorigin}+\texttt{horigin}-1.
+\end{equation}
+Thus the output interval runs from $2-\texttt{xorigin}-\texttt{horigin}$
+to $N+M-\texttt{xorigin}-\texttt{horigin}$. The implementation also
+plots $x(n)$, $h(n)$, and $y(n)$ in a single figure.
+
+\subsection{Source code}
+\lstinputlisting[caption={Scilab convolution function and example call},label={lst:convolution}]{../6.sci}
+
+\subsection{Example and expected result}
+Choose the signal from Exercises 1--3 and a two-sample impulse response:
+\begin{lstlisting}[numbers=none]
+[yn, yorigin] = convolution([1, -2, 3, 6], 3, [1, 1], 1);
+\end{lstlisting}
+Here $x(n)$ is stored on $-2\leq n\leq1$ and
+$h(n)=\delta(n)+\delta(n-1)$. Substituting this impulse response
+into the convolution sum gives a direct check:
+\begin{equation}
+  y(n)=x(n)+x(n-1).
+\end{equation}
+\begin{table}[H]
+  \centering
+  \caption{Manual calculation of the convolution example}
+  \label{tab:convolution}
+  \begin{tabular}{lrrrrr}
+    \toprule
+    Time $n$ & $-2$ & $-1$ & 0 & 1 & 2\\
+    \midrule
+    $x(n)$ & 1 & $-2$ & 3 & 6 & 0\\
+    $x(n-1)$ & 0 & 1 & $-2$ & 3 & 6\\
+    $y(n)$ & 1 & $-1$ & 1 & 9 & 6\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+The calculated result is
+\[
+  \texttt{yn}=[1,-1,1,9,6],\qquad
+  \texttt{yorigin}=3+1-1=3.
+\]
+The output has $4+2-1=5$ stored samples. Its third element corresponds
+to $n=0$.
+
+\subsection{Execution evidence}
+\resultfigure{images/exercise6.png}
+  {Input, impulse response, and convolution output for Exercise 6}
+  {fig:convolution}
+The captured Scilab plot agrees with \Cref{tab:convolution}: the output
+samples are $1,-1,1,9,6$ at $n=-2,-1,0,1,2$, respectively.
+
+\subsection{Discussion}
+Each output sample is a sum of products at the appropriate time offsets.
+For this impulse response, the system adds the current input sample and
+the preceding input sample. In particular, $y(1)=6+3=9$ and
+$y(2)=0+6=6$. The output therefore extends one sample beyond the
+stored input interval. The zero padding used to describe the finite
+sequences must be respected when calculating these boundary samples.

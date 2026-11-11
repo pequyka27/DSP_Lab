@@ -1,0 +1,127 @@
+\section{Supplementary Problem 2.1}
+The reference problem defines the discrete-time signal
+\begin{equation}
+  x(n)=\begin{cases}
+    1+\dfrac{n}{3}, & -3\leq n\leq-1,\\
+    1, & 0\leq n\leq3,\\
+    0, & \text{otherwise}.
+  \end{cases}
+\end{equation}
+All time indices in this problem are integers.
+
+\subsection{Part (a): Sample values}
+Substituting the integer time indices gives
+\begin{table}[H]
+  \centering
+  \caption{Sample values of the piecewise signal}
+  \label{tab:p21-input}
+  \begin{tabular}{lrrrrrrr}
+    \toprule
+    $n$ & $-3$ & $-2$ & $-1$ & 0 & 1 & 2 & 3\\
+    \midrule
+    $x(n)$ & 0 & $1/3$ & $2/3$ & 1 & 1 & 1 & 1\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+The sample at $n=-3$ is zero, since $1+(-3)/3=0$.
+One vector representation is
+\[
+  \texttt{xn}=[0,1/3,2/3,1,1,1,1],\qquad \texttt{xorigin}=4.
+\]
+
+\subsection{Part (b): Changing the operation order}
+\subsubsection{Fold first, then delay by four samples}
+Let $v(n)=x(-n)$. Delaying this intermediate signal gives
+\begin{equation}
+  y_{b1}(n)=v(n-4)=x(-(n-4))=x(4-n).
+\end{equation}
+Equivalently, an original sample at time $m$ moves first to $-m$ and
+then to $4-m$. The resulting piecewise expression is
+\begin{equation}
+  y_{b1}(n)=\begin{cases}
+    1, & 1\leq n\leq4,\\
+    (7-n)/3, & 5\leq n\leq7,\\
+    0, & \text{otherwise}.
+  \end{cases}
+\end{equation}
+
+\subsubsection{Delay first, then fold}
+Let $w(n)=x(n-4)$. Folding this intermediate signal gives
+\begin{equation}
+  y_{b2}(n)=w(-n)=x(-n-4).
+\end{equation}
+An original sample at time $m$ moves first to $m+4$ and then to
+$-m-4$. Therefore,
+\begin{equation}
+  y_{b2}(n)=\begin{cases}
+    1, & -7\leq n\leq-4,\\
+    (-n-1)/3, & -3\leq n\leq-1,\\
+    0, & \text{otherwise}.
+  \end{cases}
+\end{equation}
+\begin{table}[H]
+  \centering
+  \caption{Transformed samples for the two operation orders}
+  \label{tab:p21-transforms}
+  \begin{tabular}{lrrrrrrr}
+    \toprule
+    Time for $y_{b1}$ & 1 & 2 & 3 & 4 & 5 & 6 & 7\\
+    Time for $y_{b2}$ & $-7$ & $-6$ & $-5$ & $-4$ & $-3$ & $-2$ & $-1$\\
+    \midrule
+    Corresponding value & 1 & 1 & 1 & 1 & $2/3$ & $1/3$ & 0\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Part (c): The signal x(-n+4)}
+Since $-n+4=4-n$, the required signal is exactly $y_{b1}(n)$.
+Its plot and values coincide with the fold-then-delay result in part (b).
+
+\subsection{Part (d): General rule}
+For $y(n)=x(-n+k)=x(-(n-k))$, fold the original signal and then shift
+the folded signal to the right by $k$ samples when $k>0$.
+Equivalently, advance the original signal by $k$ samples and then fold.
+The direct sample mapping is
+\begin{equation}
+  m\longmapsto k-m.
+\end{equation}
+For negative $k$, the shift directions reverse. Folding and a nonzero
+time shift do not commute in general; changing their order reverses
+the direction of the resulting shift. Here the original sample at $m=0$
+lands at $n=4$ in $y_{b1}$ but at $n=-4$ in $y_{b2}$.
+
+\subsection{Part (e): Impulse and unit-step representations}
+Define $\delta(n)=1$ for $n=0$ and zero otherwise, and $u(n)=1$ for
+$n\geq0$ and zero otherwise. Using a weighted impulse at each nonzero
+sample gives
+\begin{align}
+  x(n)={}&\tfrac13\delta(n+2)+\tfrac23\delta(n+1)
+          +\delta(n)+\delta(n-1)\notag\\
+       &+\delta(n-2)+\delta(n-3).
+\end{align}
+The two piecewise intervals can also be selected by differences of
+unit steps:
+\begin{equation}
+  x(n)=\left(1+\frac n3\right)\bigl[u(n+3)-u(n)\bigr]
+       +u(n)-u(n-4).
+\end{equation}
+The first step difference selects $-3\leq n\leq-1$, and the second
+selects $0\leq n\leq3$, reproducing the original definition.
+
+\subsection{Scilab source and expected checks}
+The script evaluates the original piecewise function at each transformed
+time argument. It plots parts (a), (b1), (b2), and (c), and compares the
+two reconstructions from part (e) against the original samples on
+$-8\leq n\leq8$. This interval includes all nonzero samples of all
+plotted signals. Parts (b1) and (c) should agree exactly; reconstruction
+errors should be zero up to floating-point rounding.
+\lstinputlisting[caption={Scilab implementation of supplementary Problem 2.1},label={lst:p21}]{../2_1.sci}
+
+\subsection{Execution evidence}
+\resultfigure{images/problem21.png}
+  {Original signal and the three transformations in Problem 2.1}
+  {fig:p21}
+The captured plots agree with the calculated sample values. In particular,
+parts (b1) and (c) coincide on the positive-time side, while part (b2)
+appears at the corresponding negative time indices. The console
+reconstruction errors are separate checks and are not shown in this figure.

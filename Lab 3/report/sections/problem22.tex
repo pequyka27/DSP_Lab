@@ -1,0 +1,123 @@
+\section{Supplementary Problem 2.2}
+Figure P2.2 in the reference document specifies
+\begin{equation}
+  x(n)=\begin{cases}
+    1, & n\in\{-1,0,1,2\},\\
+    \tfrac12, & n\in\{3,4\},\\
+    0, & \text{otherwise}.
+  \end{cases}
+\end{equation}
+The following results apply at integer time indices; all samples not
+listed in a result are zero. The unit-step convention is $u(0)=1$.
+
+\subsection{Part (a): Delay by two samples}
+For $y_a(n)=x(n-2)$, every original time $m$ maps to $m+2$:
+\begin{equation}
+  y_a(n)=\begin{cases}
+    1, & n\in\{1,2,3,4\},\\
+    \tfrac12, & n\in\{5,6\},\\
+    0, & \text{otherwise}.
+  \end{cases}
+\end{equation}
+
+\subsection{Part (b): Folding followed by a four-sample delay}
+For $y_b(n)=x(4-n)$, the sample mapping is $m\mapsto4-m$:
+\begin{equation}
+  y_b(n)=\begin{cases}
+    \tfrac12, & n\in\{0,1\},\\
+    1, & n\in\{2,3,4,5\},\\
+    0, & \text{otherwise}.
+  \end{cases}
+\end{equation}
+
+\subsection{Part (c): Advance by two samples}
+For $y_c(n)=x(n+2)$, every original time $m$ maps to $m-2$:
+\begin{equation}
+  y_c(n)=\begin{cases}
+    1, & n\in\{-3,-2,-1,0\},\\
+    \tfrac12, & n\in\{1,2\},\\
+    0, & \text{otherwise}.
+  \end{cases}
+\end{equation}
+
+\subsection{Part (d): Multiplication by a reversed step}
+Since $u(2-n)=1$ precisely when $n\leq2$, the product retains the
+original samples up to and including $n=2$:
+\begin{equation}
+  y_d(n)=x(n)u(2-n)=\begin{cases}
+    1, & n\in\{-1,0,1,2\},\\
+    0, & \text{otherwise}.
+  \end{cases}
+\end{equation}
+The samples of amplitude $1/2$ at $n=3$ and $n=4$ are removed.
+
+\subsection{Part (e): Multiplication by a shifted impulse}
+The impulse $\delta(n-3)$ selects only $n=3$. Evaluating the other
+factor at this time gives $x(3-1)=x(2)=1$, so
+\begin{equation}
+  y_e(n)=x(n-1)\delta(n-3)=\delta(n-3).
+\end{equation}
+The output has a single sample of amplitude one at $n=3$.
+
+\subsection{Part (f): A squared time argument}
+The signal $y_f(n)=x(n^2)$ evaluates $x$ at the time index $n^2$;
+it does not square the sample amplitudes. For integer $n$, the relevant
+square indices are $0,1,4$:
+\begin{equation}
+  y_f(n)=\begin{cases}
+    1, & n\in\{-1,0,1\},\\
+    \tfrac12, & n\in\{-2,2\},\\
+    0, & \text{otherwise}.
+  \end{cases}
+\end{equation}
+In particular, $n=\pm2$ samples $x(4)=1/2$, and $|n|\geq3$ gives
+an argument at least nine, where $x$ is zero.
+
+\subsection{Parts (g) and (h): Even and odd components}
+The required components are
+\begin{align}
+  x_e(n)&=\frac{x(n)+x(-n)}{2},\\
+  x_o(n)&=\frac{x(n)-x(-n)}{2}.
+\end{align}
+They have the following sample values:
+\begin{table}[H]
+  \centering
+  \caption{Even and odd components of the signal in Figure P2.2}
+  \label{tab:p22-even-odd}
+  \begin{tabular}{lrrrrrrrrr}
+    \toprule
+    $n$ & $-4$ & $-3$ & $-2$ & $-1$ & 0 & 1 & 2 & 3 & 4\\
+    \midrule
+    $x(n)$ & 0 & 0 & 0 & 1 & 1 & 1 & 1 & $1/2$ & $1/2$\\
+    $x(-n)$ & $1/2$ & $1/2$ & 1 & 1 & 1 & 1 & 0 & 0 & 0\\
+    $x_e(n)$ & $1/4$ & $1/4$ & $1/2$ & 1 & 1 & 1 & $1/2$ & $1/4$ & $1/4$\\
+    $x_o(n)$ & $-1/4$ & $-1/4$ & $-1/2$ & 0 & 0 & 0 & $1/2$ & $1/4$ & $1/4$\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+The even component satisfies $x_e(-n)=x_e(n)$, while the odd component
+satisfies $x_o(-n)=-x_o(n)$ and $x_o(0)=0$. Adding the two components
+recovers the original signal at every time index.
+
+\subsection{Scilab implementation}
+The script evaluates the given signal at the required time arguments,
+uses elementwise products for parts (d) and (e), and uses
+\texttt{n.\^{}2} to square each time index in part (f). Two figure
+windows show parts (a)--(d) and (e)--(h), respectively. All plots use
+the same time interval and amplitude limits. The script also prints
+the values for parts (f)--(h) and the reconstruction error
+$\max_n|x(n)-x_e(n)-x_o(n)|$, which is expected to be zero.
+\lstinputlisting[caption={Scilab implementation of supplementary Problem 2.2},label={lst:p22}]{../2_2.sci}
+
+\subsection{Execution evidence}
+\resultfigure{images/problem22-ad.png}
+  {Time shifts, folding, and step multiplication in Problem 2.2(a)--(d)}
+  {fig:p22-ad}
+\resultfigure{images/problem22-eh.png}
+  {Impulse multiplication, squared time argument, and even and odd components in Problem 2.2(e)--(h)}
+  {fig:p22-eh}
+The captured plots agree with the analytical results for all eight parts.
+In particular, part (e) contains one impulse at $n=3$, part (f) has
+amplitudes $1/2,1,1,1,1/2$ at $n=-2,-1,0,1,2$, and the even and odd
+components show the required symmetry. The numerical reconstruction
+error is a separate console check and is not displayed in these figures.

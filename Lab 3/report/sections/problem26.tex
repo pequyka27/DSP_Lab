@@ -1,0 +1,144 @@
+\section{Supplementary Problem 2.6}
+\subsection{Criterion for time invariance}
+Let $y(n)=\mathcal{T}[x](n)$ and let $x_k(n)=x(n-k)$ be a delayed input.
+A system is time invariant if
+\begin{equation}
+  \mathcal{T}[x_k](n)=y(n-k)
+\end{equation}
+for every input $x$, integer shift $k$, and time $n$. The left side
+delays the input before applying the system; the right side delays the
+original output. A single counterexample disproves time invariance,
+whereas agreement for one example alone does not prove it.
+
+\subsection{Part (a): Squared-time system}
+For $\mathcal{T}[x](n)=x(n^2)$, the two paths give
+\begin{align}
+  \mathcal{T}[x_k](n)&=x_k(n^2)=x(n^2-k),\\
+  y(n-k)&=x((n-k)^2).
+\end{align}
+These are not equal in general. For the pulse input used in part (b),
+choose $k=2$ and $n=-2$. Then $x(n^2-k)=x(2)=1$, while
+$x((n-k)^2)=x(16)=0$. This counterexample proves that the system
+is time varying.
+
+\subsection{Part (b): Explicit pulse example}
+The specified input is
+\begin{equation}
+  x(n)=\begin{cases}1,&0\leq n\leq3,\\0,&\text{otherwise},\end{cases}
+  \qquad n\in\mathbb{Z}.
+\end{equation}
+Use $k=2$ and write $x_2(n)=x(n-2)$,
+$y'_2(n)=y(n-2)$, and $y_2(n)=\mathcal{T}[x_2](n)$.
+The five signals requested in steps (1)--(5) are determined as follows;
+all unlisted samples are zero.
+\begin{table}[H]
+  \centering
+  \caption{Pulse example for the squared-time system}
+  \label{tab:p26b}
+  \begin{tabular}{lll}
+    \toprule
+    Signal & Nonzero time indices & Sample values\\
+    \midrule
+    $x(n)$ & $0,1,2,3$ & $1,1,1,1$\\
+    $y(n)=x(n^2)$ & $-1,0,1$ & $1,1,1$\\
+    $y'_2(n)=x((n-2)^2)$ & $1,2,3$ & $1,1,1$\\
+    $x_2(n)=x(n-2)$ & $2,3,4,5$ & $1,1,1,1$\\
+    $y_2(n)=x(n^2-2)$ & $-2,2$ & $1,1$\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+For the original output, $0\leq n^2\leq3$ gives $n=-1,0,1$.
+For the shifted-input output, $0\leq n^2-2\leq3$ gives
+$2\leq n^2\leq5$, whose only integer solutions are $n=\pm2$.
+For step (6), the discrepancy is
+\begin{equation}
+  y_2(n)-y'_2(n)=\delta(n+2)-\delta(n-1)-\delta(n-3).
+\end{equation}
+The two paths differ, confirming the conclusion in part (a).
+
+\subsection{Part (c): First-difference system}
+Now consider $\mathcal{T}[x](n)=x(n)-x(n-1)$. For an arbitrary input
+and arbitrary integer delay,
+\begin{align}
+  \mathcal{T}[x_k](n)&=x(n-k)-x(n-1-k),\\
+  y(n-k)&=x(n-k)-x(n-k-1).
+\end{align}
+The two expressions are identical for all $x,n,k$. Hence this system
+is time invariant.
+
+For the same pulse input, the original output has one positive sample
+at the leading edge and one negative sample immediately after the pulse:
+\begin{equation}
+  y(n)=\delta(n)-\delta(n-4).
+\end{equation}
+Repeating steps (1)--(5) gives the following nonzero samples:
+\begin{table}[H]
+  \centering
+  \caption{Pulse example for the first-difference system}
+  \label{tab:p26c}
+  \begin{tabular}{lll}
+    \toprule
+    Signal & Nonzero time indices & Sample values\\
+    \midrule
+    $x(n)$ & $0,1,2,3$ & $1,1,1,1$\\
+    $y(n)$ & $0,4$ & $1,-1$\\
+    $y'_2(n)=y(n-2)$ & $2,6$ & $1,-1$\\
+    $x_2(n)$ & $2,3,4,5$ & $1,1,1,1$\\
+    $y_2(n)=\mathcal{T}[x_2](n)$ & $2,6$ & $1,-1$\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+Thus $y_2(n)=y'_2(n)=\delta(n-2)-\delta(n-6)$ and their difference
+is zero. This particular agreement illustrates time invariance; the
+general algebraic identity above is what proves it.
+
+\subsection{Part (d): Multiplication by time}
+For $\mathcal{T}[x](n)=n x(n)$, the two paths are
+\begin{align}
+  \mathcal{T}[x_k](n)&=n x(n-k),\\
+  y(n-k)&=(n-k)x(n-k).
+\end{align}
+Their difference is $k x(n-k)$, which is nonzero for suitable inputs
+and nonzero $k$. Consequently this system is time varying.
+
+For the given pulse and $k=2$, the nonzero samples in steps (1)--(5) are
+\begin{table}[H]
+  \centering
+  \caption{Pulse example for the time-multiplication system}
+  \label{tab:p26d}
+  \begin{tabular}{lll}
+    \toprule
+    Signal & Nonzero time indices & Sample values\\
+    \midrule
+    $x(n)$ & $0,1,2,3$ & $1,1,1,1$\\
+    $y(n)=nx(n)$ & $1,2,3$ & $1,2,3$\\
+    $y'_2(n)=(n-2)x(n-2)$ & $3,4,5$ & $1,2,3$\\
+    $x_2(n)$ & $2,3,4,5$ & $1,1,1,1$\\
+    $y_2(n)=nx(n-2)$ & $2,3,4,5$ & $2,3,4,5$\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+The difference $y_2(n)-y'_2(n)=2x(n-2)$ equals two at
+$n=2,3,4,5$ and zero elsewhere. For example, at $n=2$ the shifted
+output is zero while the response to the shifted input is two.
+
+\subsection{Scilab implementation and expected results}
+The script uses a direct evaluator for the pulse to avoid truncating
+shifted signals at vector boundaries. It creates one figure per system,
+each containing the five requested signals and a sixth plot of
+$\mathcal{T}[x_2](n)-y(n-2)$. The interval $-4\leq n\leq8$ contains
+all nonzero samples for these examples. The maximum absolute
+discrepancies are expected to be $1$, $0$, and $2$ for parts (b), (c),
+and (d), respectively.
+\lstinputlisting[caption={Scilab implementation of supplementary Problem 2.6},label={lst:p26}]{../2_6.sci}
+
+\subsection{Execution evidence}
+\resultfigure{images/problem26-b.png}
+  {Pulse experiment for the squared-time system in Problem 2.6(b)}
+  {fig:p26b}
+\resultfigure{images/problem26-c.png}
+  {Pulse experiment for the first-difference system in Problem 2.6(c)}
+  {fig:p26c}
+\resultfigure{images/problem26-d.png}
+  {Pulse experiment for the time-multiplication system in Problem 2.6(d)}
+  {fig:p26d}
